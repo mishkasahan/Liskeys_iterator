@@ -1,23 +1,24 @@
 class MyIterator:
-    def __init__(self, slovnyk: dict):
-        self.slovnyk = slovnyk
-        self.value = 0
+    def __init__(self, start, end):
+        self.end = end
+        self.value = start
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        b = list(self.slovnyk.keys())
-        if self.value >= len(self.slovnyk):
+        if self.value >= self.end:
             raise StopIteration
-        result = b[self.value]
+        if self.value % 2 != 0:
+            self.value += 1
+            rezult = self.value
+        else:
+            rezult = self.value
+
         self.value += 1
-        return result
+        return rezult
 
 
-slov = {"Misha": 4,
-        "Marko": 5,
-        "Nasar": 7}
-myrange = MyIterator(slov)
+myrange = MyIterator(3,9)
 for i in myrange:
     print(i)
